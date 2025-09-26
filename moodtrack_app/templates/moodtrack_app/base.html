@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'moodtrack_app/main.css' %}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css"
+      integrity="sha384-dpuaG1suU0eT09tx5plTaGMLBsfDLzUCCUXOY2j/LSvXYuG6Bqs43ALlhIqAJVRb"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>MoodTrack</title>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <div class="wrapper">
+      <div class="sidebar">
+        <div class="logo">
+          <h2>MoodTrack</h2>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a href="{% url 'home' %}"
+              ><i class="fa-solid fa-house"></i> <span> Home</span></a
+            >
+          </li>
+          <li>
+            <a href="{% url 'home' %}"
+              ><i class="fa-solid fa-search"></i><span> Search</span></a
+            >
+          </li>
+          <li>
+            <a href="{% url 'profile' %}"
+              ><i class="fa-solid fa-user"></i><span> Profile</span></a
+            >
+          </li>
+          <li>
+            <a href="{% url 'post-create' %}"
+              ><i class="fa-solid fa-plus"></i><span> New Post</span></a
+            >
+          </li>
+          {% if user.is_authenticated %}
+          <li>
+            <a href="{% url 'user-posts' request.user.username %}"
+              ><i class="fa-solid fa-pen-to-square"></i>
+              <span> My Posts</span></a
+            >
+          </li>
+          <li class="auth-btns">
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="logout-btn">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i
+                ><span> Logout</span>
+              </button>
+            </form>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'register' %}"
+              ><i class="bx bx-home"></i><span> Register</span></a
+            >
+          </li>
+          <li>
+            <a href="{% url 'login' %}"
+              ><i class="bx bx-home"></i><span> Login</span></a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="main-content">
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" id="message-container">
+          {{ message }}
+        </div>
+        {% endfor %} {% endif %} {% block content %}{% endblock %}
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-section-about">
+            <h2>About Us</h2>
+            <p>Book appointment with experienced doctors with ease.</p>
+          </div>
+          <div class="footer-section-links">
+            <h2>Quick Links</h2>
+            <ul>
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">FAQs</a></li>
+            </ul>
+          </div>
+          <div class="footer-section-contact">
+            <h2>Contact Us</h2>
+            <p><box-icon name="current-location"></box-icon> Abuja</p>
+            <p><box-icon name="envelope"></box-icon> ad123eg456@gmail.com</p>
+            <p><box-icon name="phone"></box-icon> +234 806 841 9918</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          &copy; 2025 MedLink | All rights reserved.
+        </div>
+      </div>
+    </footer>
+    <script type="text/javascript">
+      setTimeout(function () {
+        const messageContainer = document.getElementById("message-container");
+        if (messageContainer) {
+          messageContainer.style.display = "none";
+        }
+      }, 5000);
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz4fnFO9gyb4pdogXx4ITyO91D/pBz0p5zzj0h5fJkSTe1m3eRbmprh3Xv"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-QmrVhtQZgi8Zi2gu2bB1+LrZ7kY+0XcF6EVTBrDpt1JokQO3lK3IB/4EgmgS7A4r"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

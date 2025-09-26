@@ -1,0 +1,120 @@
+{% extends "moodtrack_app/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'moodtrack_app/home.css' %}">
+
+<div class="category-section">
+  <a href="{% url 'home' %}">All</a>
+  <a href="{% url 'political-posts' %}">Political</a>
+  <a href="{% url 'sports-posts' %}">Sports</a>
+  <a href="{% url 'nature-posts' %}">Nature & Wildlife</a>
+  <a href="{% url 'food-posts' %}">Food</a>
+</div>
+
+{% if posts %}
+  {% for post in posts %}
+    <article class="post">
+      <img class="post-avatar" src="{{ post.author.profile.image.url }}">
+      <div class="post-body">
+        <div class="post-meta">
+          <a href="{% url 'user-posts' post.author.username %}" class="post-author">{{ post.author }}</a>
+          <span class="post-date">{{ post.date_posted|date:"F d, Y" }}</span>
+        </div>
+        <h2 class="post-title">
+          <a href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
+        </h2>
+        <p class="post-content">{{ post.content }}</p>
+
+        <div class="post-actions" data-post-id="{{ post.id }}">
+          <button class="like-btn" data-url="{% url 'like-post' post.id %}">
+            👍<span class="like-count">{{ post.total_likes }}</span>
+          </button>
+          <button class="dislike-btn" data-url="{% url 'dislike-post' post.id %}">
+            👎<span class="dislike-count">{{ post.total_dislikes }}</span>
+          </button>
+        </div>
+      </div>
+    </article>
+  {% endfor %}
+{% else %}
+  <p class="no-post">No posts found in this category.</p>
+{% endif %}
+
+{% if is_paginated %}
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page=1">First</a>
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <span class="current">{{ num }}</span>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a href="?page={{ num }}">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+  </div>
+{% endif %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function sendAction(url, likeCountEl, dislikeCountEl) {
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": getCookie("csrftoken"),
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      likeCountEl.textContent = data.likes;
+      dislikeCountEl.textContent = data.dislikes;
+    });
+  }
+
+  // CSRF helper
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + "=")) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  // Attach listeners to each post’s buttons
+  document.querySelectorAll(".post-actions").forEach(function (postActions) {
+    const likeBtn = postActions.querySelector(".like-btn");
+    const dislikeBtn = postActions.querySelector(".dislike-btn");
+    const likeCountEl = postActions.querySelector(".like-count");
+    const dislikeCountEl = postActions.querySelector(".dislike-count");
+
+    if (likeBtn) {
+      likeBtn.addEventListener("click", function () {
+        sendAction(this.dataset.url, likeCountEl, dislikeCountEl);
+      });
+    }
+
+    if (dislikeBtn) {
+      dislikeBtn.addEventListener("click", function () {
+        sendAction(this.dataset.url, likeCountEl, dislikeCountEl);
+      });
+    }
+  });
+});
+</script>
+
+{% endblock content %}
