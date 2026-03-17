@@ -14,7 +14,7 @@
 {% if posts %}
   {% for post in posts %}
     <article class="post">
-      <img class="post-avatar" src="{{ post.author.profile.image.url }}">
+      <img class="post-avatar" src="{{ post.author.profile.image.url }}" alt="profile picture">
       <div class="post-body">
         <div class="post-meta">
           <a href="{% url 'user-posts' post.author.username %}" class="post-author">{{ post.author }}</a>
@@ -32,6 +32,30 @@
           <button class="dislike-btn" data-url="{% url 'dislike-post' post.id %}">
             👎<span class="dislike-count">{{ post.total_dislikes }}</span>
           </button>
+          {% if post.total_comments > 0 %}
+          
+<div class="sentiment-bar">
+  {% for key, value in post.sentiment_data.items %}
+    {% if value > 0 %}
+      <div 
+        class="segment {{ key }}" 
+        style="width: {{ value }}%;"
+        title="{{ key }}: {{ value }}%">
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<div class="sentiment-text">
+  {% for key, value in post.sentiment_data.items %}
+    {% if value > 0 %}
+      <span class="sentiment-label {{ key }}">
+        {{ value }}% {{ key }}
+      </span>
+    {% endif %}
+  {% endfor %}
+</div>
+          {% endif %}
         </div>
       </div>
     </article>

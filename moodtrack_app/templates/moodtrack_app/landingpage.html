@@ -1,0 +1,66 @@
+{% extends "moodtrack_app/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'moodtrack_app/landingpage.css' %}">
+
+
+<div class="hero">
+    <h2>Understand Emotions in Every Post</h2>
+    <p>
+        MoodTrack analyzes user comments in real-time to reveal the emotional tone behind every discussion.
+    </p>
+    <a href="{% url 'register' %}">Register</a>
+</div>
+
+<div class="features">
+    <div class="feature">
+        <h3>Real-Time Sentiment</h3>
+        <p>Every comment is instantly analyzed using AI to detect emotions like happiness, anger, or sadness.</p>
+    </div>
+
+    <div class="feature">
+        <h3>Visual Sentiment Bars</h3>
+        <p>See emotional breakdowns through dynamic color-coded bars for each post.</p>
+    </div>
+
+    <div class="feature">
+        <h3>User Interaction</h3>
+        <p>Like, dislike, and comment while tracking how others feel about the same content.</p>
+    </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-it-works">
+    <h2>How It Works</h2>
+
+    <div class="steps">
+        <div class="step">
+            <h4>1. User Posts Content</h4>
+            <p>Users create posts and start discussions.</p>
+        </div>
+
+        <div class="step">
+            <h4>2. Comments Are Added</h4>
+            <p>Other users engage by commenting on posts.</p>
+        </div>
+
+        <div class="step">
+            <h4>3. AI Analyzes Sentiment</h4>
+            <p>The system detects emotions like happy, sad, anger, fear, surprise, and neutral.</p>
+        </div>
+
+        <div class="step">
+            <h4>4. Results Are Displayed</h4>
+            <p>Each post shows a live sentiment bar and percentage breakdown.</p>
+        </div>
+    </div>
+</div>
+
+<div class="cta">
+    <h2>Start Exploring Emotions Today</h2>
+    <p>Join MoodTrack and see what people really feel.</p>
+</div>
+
+
+
+{% endblock %}

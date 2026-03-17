@@ -41,11 +41,7 @@
               ><i class="fa-solid fa-house"></i> <span> Home</span></a
             >
           </li>
-          <li>
-            <a href="{% url 'home' %}"
-              ><i class="fa-solid fa-search"></i><span> Search</span></a
-            >
-          </li>
+          {% if user.is_authenticated %}
           <li>
             <a href="{% url 'profile' %}"
               ><i class="fa-solid fa-user"></i><span> Profile</span></a
@@ -56,7 +52,6 @@
               ><i class="fa-solid fa-plus"></i><span> New Post</span></a
             >
           </li>
-          {% if user.is_authenticated %}
           <li>
             <a href="{% url 'user-posts' request.user.username %}"
               ><i class="fa-solid fa-pen-to-square"></i>
@@ -75,12 +70,12 @@
           {% else %}
           <li>
             <a href="{% url 'register' %}"
-              ><i class="bx bx-home"></i><span> Register</span></a
+              ><i class="fa-solid fa-address-card"></i><span> Register</span></a
             >
           </li>
           <li>
             <a href="{% url 'login' %}"
-              ><i class="bx bx-home"></i><span> Login</span></a
+              ><i class="fa-solid fa-arrow-right-to-bracket"></i><span> Login</span></a
             >
           </li>
           {% endif %}
@@ -99,7 +94,7 @@
         <div class="footer-content">
           <div class="footer-section-about">
             <h2>About Us</h2>
-            <p>Book appointment with experienced doctors with ease.</p>
+            <p>Track emotions through sentiments and improve user interaction!</p>
           </div>
           <div class="footer-section-links">
             <h2>Quick Links</h2>
@@ -111,7 +106,7 @@
             </ul>
           </div>
           <div class="footer-section-contact">
-            <h2>Contact Us</h2>
+            <h2>Contact Me</h2>
             <p><box-icon name="current-location"></box-icon> Abuja</p>
             <p><box-icon name="envelope"></box-icon> ad123eg456@gmail.com</p>
             <p><box-icon name="phone"></box-icon> +234 806 841 9918</p>

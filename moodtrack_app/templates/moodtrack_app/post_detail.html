@@ -1,20 +1,39 @@
 {% extends "moodtrack_app/base.html" %}
+{% load static %}
 {% block content %}
-    <article class="media content-section">
-      <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" alt="">
-        <div class="media-body">
-          <div class="article-metadata">
-            <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
-            <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-            {% if object.author == user %}
-              <div>
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
-              </div>
-            {% endif %}
-          </div>
-          <h2 class="article-title">{{ object.title }}</h2>
-          <p class="article-content">{{ object.content }}</p>
-        </div>
-      </article>
+<link rel="stylesheet" href="{% static 'moodtrack_app/post_detail.css' %}">
+
+<article class="post-card">
+  <h2>{{ post.title }}</h2>
+  <p class="post-meta">By {{ post.author }} | {{ post.created_at|date:"F d, Y" }}</p>
+  <p>{{ post.content }}</p>
+</article>
+
+<hr>
+
+<!-- Comments Section -->
+<h3>Comments ({{ comments.count }})</h3>
+
+{% for comment in comments %}
+  <div class="comment">
+    <strong>{{ comment.author }}</strong> 
+    <small>{{ comment.created_at|date:"F d, Y H:i" }}</small>
+    <p>{{ comment.content }}</p>
+  </div>
+{% empty %}
+  <p>No comments yet. Be the first to comment!</p>
+{% endfor %}
+
+<hr>
+
+{% if user.is_authenticated %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-comment">Add Comment</button>
+  </form>
+{% else %}
+  <p><a href="{% url 'login' %}">Log in</a> to comment.</p>
+{% endif %}
+
 {% endblock content %}
