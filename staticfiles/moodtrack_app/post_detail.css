@@ -1,0 +1,21 @@
+.comment {
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem 0;
+}
+
+.comment strong {
+  color: #0077cc;
+}
+
+.btn-comment {
+  background: #0077cc;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-comment:hover {
+  background: #005fa3;
+}

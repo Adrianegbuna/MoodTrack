@@ -1,0 +1,49 @@
+/* Form container */
+.content-section {
+    background: #fff;
+    padding: 2rem;
+    margin: 3rem auto;
+    border-radius: 10px;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+legend,
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 1rem;
+}
+
+/* Buttons */
+button,
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #0f172a;
+    color: white;
+    transition: 0.3s;
+}
+
+button:hover,
+.btn:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Extra spacing */
+.border-top {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}

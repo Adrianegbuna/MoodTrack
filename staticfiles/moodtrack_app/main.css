@@ -1,0 +1,279 @@
+/* Reset & Base */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", "Times New Roman";
+}
+
+body {
+  background-color: #f7f9fc;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.notifications-link {
+  text-decoration: none;
+}
+
+/* sidebar */
+.sidebar {
+  width: 60px;
+  background-color: #0f172a;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+  position: fixed;
+  height: 100vh;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  transition: width 0.3s ease;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.sidebar:hover {
+  width: 200px;
+}
+
+.logo h2 {
+  color: #fff;
+  margin: 0;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  opacity: 0;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .logo h2 {
+  opacity: 1;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.nav-links li {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.nav-links a,
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1rem 1.2rem;
+  color: #f8fafc;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.nav-links a i,
+.logout-btn i {
+  font-size: 1.2rem;
+  min-width: 24px;
+  text-align: center;
+}
+
+.nav-links a span,
+.logout-btn span {
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .nav-links a span,
+.sidebar:hover .logout-btn span {
+  opacity: 1;
+}
+
+.nav-links a:hover,
+.logout-btn:hover {
+  background-color: #1e293b;
+}
+
+.auth-btns form {
+  margin: 0;
+}
+
+/* Content */
+.main-content {
+  margin-left: 80px;
+  padding: 2rem;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+#message-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 15px;
+  color: #fff;
+  background: #0f172a;
+}
+
+/* Footer */
+.footer {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 50px 0 20px 0;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.footer h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.footer p,
+.footer li,
+.footer a {
+  color: #ccc;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-section-links li {
+  margin-bottom: 8px;
+}
+
+.footer-section-links ul li a {
+  text-decoration: none;
+}
+
+.footer-section-contact p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #444;
+  padding-top: 15px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* Authorization Page */
+.access-denied-container {
+  text-align: center;
+  padding: 40px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.access-denied-container h2 {
+  color: #0f172a;
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.access-denied-container p {
+  color: #555;
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .footer-section-about,
+  .footer-section-links,
+  .footer-section-contact {
+    width: 100%;
+  }
+
+  .footer-section-links ul {
+    padding-left: 0;
+  }
+
+  .footer-section-links ul li {
+    list-style: none;
+  }
+
+  .footer h2 {
+    font-size: 18px;
+  }
+
+  .footer p,
+  .footer a,
+  .footer li {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 40px 10px 15px 10px;
+  }
+
+  .footer h2 {
+    font-size: 16px;
+  }
+
+  .footer-bottom {
+    font-size: 13px;
+  }
+
+  .footer-section-contact p {
+    font-size: 13px;
+  }
+
+  .footer-section-contact box-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
