@@ -7,6 +7,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('follow/<str:username>/', user_views.follow_user, name='follow-user'),
+    path('unfollow/<str:username>/', user_views.unfollow_user, name='unfollow-user'),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
 
