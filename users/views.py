@@ -1,7 +1,25 @@
-from django.shortcuts import render, redirect  
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages  
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+from .models import Follow
+
+User = get_user_model()
+
+@login_required
+def follow_user(request, username):
+    user_to_follow = get_object_or_404(User, username=username)
+    if user_to_follow != request.user:
+        Follow.objects.get_or_create(follower=request.user, following=user_to_follow)
+    return redirect('user-posts', username=username)
+
+@login_required
+def unfollow_user(request, username):
+    user_to_unfollow = get_object_or_404(User, username=username)
+    Follow.objects.filter(follower=request.user, following=user_to_unfollow).delete()
+    return redirect('user-posts', username=username)
+
 
 def register(request):
     if request.method == 'POST': 
