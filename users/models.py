@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 from PIL import Image
 
 class Profile(models.Model):
@@ -18,3 +19,22 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+class Follow(models.Model):
+    follower = models.ForeignKey(
+        User,
+        related_name="following",
+        on_delete=models.CASCADE
+    )
+    following = models.ForeignKey(
+        User,
+        related_name="followers",
+        on_delete=models.CASCADE
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('follower', 'following')
+
+    def __str__(self):
+        return f"{self.follower} follows {self.following}"

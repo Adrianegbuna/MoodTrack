@@ -26,24 +26,15 @@ button,
     font-size: 1rem;
     border-radius: 5px;
     border: none;
-    background-color: #0d6efd;
+    background-color: #0f172a;
     color: white;
     transition: 0.3s;
 }
 
 button:hover,
 .btn:hover {
-    background-color: #0b5ed7;
-}
-
-/* Links */
-a {
-    color: #0d6efd;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+    background-color: black;
+    color: white;
 }
 
 /* Extra spacing */

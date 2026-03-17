@@ -1,24 +1,24 @@
 {% extends "moodtrack_app/base.html" %}
 {% load crispy_forms_tags %}
-{% block content %} 
-   <div class="content-section">
-     <div class="media">
-       <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-       <div class="media-body">
-         <h2 class="account-heading">{{ user.username }}</h2>
-         <p class="text-secondary">{{ user.email }}</p>
-       </div>
-     </div>
-     <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Profile Info</legend> 
-          {{ u_form|crispy }}
-          {{ p_form|crispy }}
-      </fieldset>
-      <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Update</button>
-      </div>
-    </form> 
-   </div>
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'users/profile.css' %}">
+
+<div class="profile-container">
+  <div class="profile-header">
+    <img class="profile-img" src="{{ user.profile.image.url }}" alt="{{ user.username }}">
+    <div class="profile-details">
+      <h2 class="profile-username">{{ user.username }}</h2>
+      <p class="profile-email">{{ user.email }}</p>
+    </div>
+  </div>
+
+  <form method="POST" enctype="multipart/form-data" class="profile-form">
+    {% csrf_token %}
+    <h3 class="form-title">Profile Info</h3>
+    {{ u_form|crispy }}
+    {{ p_form|crispy }}
+    <button class="update-btn" type="submit">Update</button>
+  </form>
+</div>
 {% endblock content %}
