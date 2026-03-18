@@ -222,8 +222,47 @@ ul {
   font-size: 16px;
 }
 
-/* Responsive */
+/* ============================================
+   RESPONSIVE - TABLET (768px and below)
+   ============================================ */
 @media (max-width: 768px) {
+  /* Narrower sidebar */
+  .sidebar {
+    width: 50px;
+    padding-top: 1.5rem;
+  }
+
+  .sidebar:hover {
+    width: 180px;
+  }
+
+  .logo h2 {
+    font-size: 1.3rem;
+  }
+
+  .nav-links li {
+    margin: 15px 0;
+  }
+
+  .nav-links a,
+  .logout-btn {
+    padding: 0.875rem 1rem;
+    gap: 8px;
+  }
+
+  .nav-links a i,
+  .logout-btn i {
+    font-size: 1.1rem;
+    min-width: 20px;
+  }
+
+  /* Adjust main content margin */
+  .main-content {
+    margin-left: 65px;
+    padding: 1.5rem;
+  }
+
+  /* Footer responsive */
   .footer-content {
     flex-direction: column;
     align-items: flex-start;
@@ -255,7 +294,55 @@ ul {
   }
 }
 
+/* ============================================
+   RESPONSIVE - MOBILE (480px and below)
+   ============================================ */
 @media (max-width: 480px) {
+  /* Even narrower sidebar */
+  .sidebar {
+    width: 45px;
+    padding-top: 1rem;
+  }
+
+  .sidebar:hover {
+    width: 160px;
+  }
+
+  .logo h2 {
+    font-size: 1.1rem;
+  }
+
+  .nav-links li {
+    margin: 12px 0;
+  }
+
+  .nav-links a,
+  .logout-btn {
+    padding: 0.75rem 0.75rem;
+    gap: 6px;
+    font-size: 0.9rem;
+  }
+
+  .nav-links a i,
+  .logout-btn i {
+    font-size: 1rem;
+    min-width: 18px;
+  }
+
+  /* Adjust main content margin */
+  .main-content {
+    margin-left: 55px;
+    padding: 0.5rem;
+  }
+
+  #message-container {
+    top: 10px;
+    right: 10px;
+    padding: 0.75rem 1rem;
+    font-size: 13px;
+  }
+
+  /* Footer */
   .footer {
     padding: 40px 10px 15px 10px;
   }
@@ -275,5 +362,47 @@ ul {
   .footer-section-contact box-icon {
     width: 16px;
     height: 16px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - SMALL MOBILE (360px and below)
+   ============================================ */
+@media screen and (max-width: 360px) {
+  /* Minimal sidebar width */
+  .sidebar {
+    width: 40px;
+    padding-top: 0.75rem;
+  }
+
+  .sidebar:hover {
+    width: 140px;
+  }
+
+  .logo h2 {
+    font-size: 1rem;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .nav-links a,
+  .logout-btn {
+    padding: 0.625rem 0.625rem;
+    gap: 5px;
+    font-size: 0.85rem;
+  }
+
+  .nav-links a i,
+  .logout-btn i {
+    font-size: 0.9rem;
+    min-width: 16px;
+  }
+
+  /* Adjust main content margin */
+  .main-content {
+    margin-left: 48px;
+    padding: 0.2rem;
   }
 }
