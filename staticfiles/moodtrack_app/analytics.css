@@ -1,0 +1,135 @@
+/* HERO SECTION */
+.hero {
+    text-align: center;
+    padding: 40px 20px;
+    background-color:#6c63ff;
+    color: white;
+    border-radius: 0 0 20px 20px;
+}
+
+.hero h2 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.hero p {
+    opacity: 0.9;
+}
+
+/* GRID LAYOUT */
+.analytics-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 30px;
+}
+
+/* CARD */
+.analytics-card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.analytics-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+}
+
+.analytics-card h3 {
+    margin-bottom: 5px;
+}
+
+.analytics-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* POST CARD */
+.post-card {
+    background: #f9fafc;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border-left: 5px solid #ddd;
+    transition: 0.2s;
+}
+
+.post-card:hover {
+    background: #f1f4ff;
+}
+
+.post-card h4 {
+    margin: 0 0 5px;
+    font-size: 1rem;
+}
+
+.post-card p {
+    font-size: 0.85rem;
+    color: #555;
+}
+
+/* SENTIMENT COLORS */
+.score {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.score.positive {
+    color: #2ecc71;
+}
+
+.score.negative {
+    color: #e74c3c;
+}
+
+.score.neutral {
+    color: #7f8c8d;
+}
+
+/* MINI STATS (for controversial posts) */
+.mini-stats {
+    margin-top: 8px;
+    display: flex;
+    gap: 10px;
+    font-size: 0.8rem;
+}
+
+.mini-stats span {
+    background: #eef1ff;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+/* INSIGHTS SECTION */
+.insights {
+    margin: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.insights h3 {
+    margin-bottom: 10px;
+}
+
+.insights p {
+    color: #555;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .analytics-section {
+        padding: 15px;
+    }
+}

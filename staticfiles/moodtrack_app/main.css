@@ -28,7 +28,7 @@ ul {
 /* sidebar */
 .sidebar {
   width: 60px;
-  background-color: #0f172a;
+  background-color: #6c63ff;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -136,12 +136,12 @@ ul {
   font-weight: 500;
   font-size: 15px;
   color: #fff;
-  background: #0f172a;
+  background: #6c63ff;
 }
 
 /* Footer */
 .footer {
-  background: #0f172a;
+  background: #6c63ff;
   color: #ffffff;
   padding: 50px 0 20px 0;
 }
@@ -212,7 +212,7 @@ ul {
 }
 
 .access-denied-container h2 {
-  color: #0f172a;
+  color: #6c63ff;
   font-size: 28px;
   margin-bottom: 15px;
 }

@@ -1,7 +1,3 @@
-/* ============================================
-   EXISTING STYLES - PRESERVED AS-IS
-   ============================================ */
-
 .post {
   display: flex;
   gap: 1rem;
@@ -44,7 +40,7 @@
 
 .post-title a {
   text-decoration: none;
-  color: #0f172a;
+  color: #6c63ff;
 }
 
 .post-content {
@@ -78,7 +74,7 @@
 }
 
 .category-section a {
-  background-color: #0f172a;
+  background-color: #6c63ff;
   color: white;
   min-width: 60px;
   margin: 0 1rem;
@@ -115,11 +111,11 @@
 }
 
 /* Colors */
-.segment.happy {
+.segment.joy {
   background-color: #22c55e;
 }
 
-.segment.angry {
+.segment.anger {
   background-color: #ef4444;
 }
 
@@ -139,11 +135,22 @@
   background-color: grey;
 }
 
-/* ============================================
-   RESPONSIVE ADDITIONS - MEDIA QUERIES
-   ============================================ */
+.segment.disgust {
+  background-color: #84cc16;
+}
 
-/* Mobile navigation - hidden by default on desktop */
+.segment.excitement {
+  background-color: #ec4899;
+}
+
+.segment.confusion {
+  background-color: #14b8a6;
+}
+
+.segment.relief {
+  background-color: #8b5cf6;
+}
+
 .mobile-nav {
   display: none;
   position: relative;
@@ -155,7 +162,7 @@
   justify-content: space-around;
   width: 40px;
   height: 40px;
-  background: #0f172a;
+  background: #6c63ff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -201,7 +208,7 @@
   width: 70%;
   max-width: 300px;
   height: 100vh;
-  background-color: #0f172a;
+  background-color: #6c63ff;
   flex-direction: column;
   padding: 5rem 1.5rem 2rem 1.5rem;
   gap: 0.5rem;
@@ -332,7 +339,7 @@
     gap: 0.75rem;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 4rem; /* Space for hamburger button */
+    margin-top: 4rem;
   }
 
   .post-avatar {
@@ -404,7 +411,6 @@
   }
 }
 
-/* Large desktop (optional - for screens above 1200px) */
 @media screen and (min-width: 1200px) {
   .post {
     max-width: 800px;

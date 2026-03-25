@@ -4,11 +4,11 @@
 }
 
 .comment strong {
-  color: #0f172a;
+  color: #6c63ff;
 }
 
 .btn-comment {
-  background: #0f172a;
+  background: #6c63ff;
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -17,3 +17,4 @@
 }
 
 
+/* #0f172a
