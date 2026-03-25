@@ -18,9 +18,9 @@ MEDIA_URL = '/media/'
 SECRET_KEY = config("SK")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [moodtrack-hc03.onrender.com]
 
 
 # Application definition
