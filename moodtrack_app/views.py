@@ -10,6 +10,9 @@ from .forms import CommentForm
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import FormMixin
 from .ml_model import predict_sentiment
+from django.db.models import Count, Q
+
+
 
 
 
@@ -39,12 +42,16 @@ class CategoryPostView(ListView):
             total = comments.count()
 
             sentiment_counts = {
-                "happy": 0,
-                "angry": 0,
+                "joy": 0,
+                "anger": 0,
                 "sad": 0,
                 "fear": 0,
                 "surprise": 0,
                 "neutral": 0,
+                "disgust": 0,
+                "excitement": 0,
+                "relief": 0,
+                "confusion": 0,
             }
 
             for comment in comments:
@@ -213,4 +220,68 @@ class DislikePostView(LoginRequiredMixin, View):
 class LandingPageView(TemplateView):
     template_name = 'moodtrack_app/landingpage.html'
 
+class AnalyticsView(ListView):
+    model = Post
+    template_name = 'moodtrack_app/analytics.html'
+    context_object_name = 'posts'
+    paginate_by = 5
 
+    def get_queryset(self):
+        """
+        Annotate all posts with sentiment counts and total comments.
+        """
+        return Post.objects.annotate(
+            joy_count=Count('comments', filter=Q(comments__sentiment='joy')),
+            anger_count=Count('comments', filter=Q(comments__sentiment='anger')),
+            sad_count=Count('comments', filter=Q(comments__sentiment='sad')),
+            fear_count=Count('comments', filter=Q(comments__sentiment='fear')),
+            surprise_count=Count('comments', filter=Q(comments__sentiment='surprise')),
+            neutral_count=Count('comments', filter=Q(comments__sentiment='neutral')),
+            disgust_count=Count('comments', filter=Q(comments__sentiment='disgust')),
+            excitement_count=Count('comments', filter=Q(comments__sentiment='excitement')),
+            relief_count=Count('comments', filter=Q(comments__sentiment='relief')),
+            confusion_count=Count('comments', filter=Q(comments__sentiment='confusion')),
+            total_comments=Count('comments'),
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Helper function to calculate sentiment_data for any post
+        def add_sentiment_data(posts_list):
+            for post in posts_list:
+                total = post.total_comments or 1
+                post.sentiment_data = {
+                    'joy': round(post.joy_count / total * 100),
+                    'anger': round(post.anger_count / total * 100),
+                    'sad': round(post.sad_count / total * 100),
+                    'fear': round(post.fear_count / total * 100),
+                    'surprise': round(post.surprise_count / total * 100),
+                    'neutral': round(post.neutral_count / total * 100),
+                    'disgust': round(post.disgust_count / total * 100),
+                    'excitement': round(post.excitement_count / total * 100),
+                    'relief': round(post.relief_count / total * 100),
+                    'confusion': round(post.confusion_count / total * 100),
+                }
+            return posts_list
+
+        # Calculate for paginated posts
+        add_sentiment_data(context["posts"])
+
+        # Get full queryset for top posts rankings
+        qs = self.get_queryset()
+        
+        # Get top posts for each sentiment and add sentiment_data to each
+        context['top_joy_posts'] = add_sentiment_data(list(qs.order_by('-joy_count')[:5]))
+        context['top_anger_posts'] = add_sentiment_data(list(qs.order_by('-anger_count')[:5]))
+        context['top_sad_posts'] = add_sentiment_data(list(qs.order_by('-sad_count')[:5]))
+        context['top_fear_posts'] = add_sentiment_data(list(qs.order_by('-fear_count')[:5]))
+        context['top_surprise_posts'] = add_sentiment_data(list(qs.order_by('-surprise_count')[:5]))
+        context['top_disgust_posts'] = add_sentiment_data(list(qs.order_by('-disgust_count')[:5]))
+        context['top_confusion_posts'] = add_sentiment_data(list(qs.order_by('-confusion_count')[:5]))
+        context['top_excitement_posts'] = add_sentiment_data(list(qs.order_by('-excitement_count')[:5]))
+        context['top_relief_posts'] = add_sentiment_data(list(qs.order_by('-relief_count')[:5]))
+        context['top_neutral_posts'] = add_sentiment_data(list(qs.order_by('-neutral_count')[:5]))
+        context['controversial_posts'] = add_sentiment_data(list(qs.order_by('-total_comments')[:5]))
+
+        return context

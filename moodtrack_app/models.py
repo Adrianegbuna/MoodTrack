@@ -47,12 +47,16 @@ class Dislike(models.Model):
 
 class Comment(models.Model):
     SENTIMENT_CHOICES = [
-        ('happy', 'Happy'),
-        ('angry', 'Angry'),
+        ('joy', 'Joy'),
+        ('anger', 'Anger'),
         ('sad', 'Sad'),
         ('fear', 'Fear'),
         ('surprise', 'Surprise'),
         ('neutral', 'Neutral'),
+        ('disgust', 'Disgust'),
+        ('excitement', 'Excitement'),
+        ('relief', 'Relief'),
+        ('confusion', 'Confusion'),
     ]
 
     post = models.ForeignKey("Post", on_delete=models.CASCADE, related_name="comments")

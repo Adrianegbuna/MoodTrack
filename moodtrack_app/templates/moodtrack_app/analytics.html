@@ -1,0 +1,157 @@
+{% extends "moodtrack_app/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'moodtrack_app/analytics.css' %}">
+
+<div class="hero">
+    <h2>Sentiment Analytics Dashboard</h2>
+    <p>
+        Explore how users feel across posts. Discover which posts generate the most happiness, anger, sadness, and more.
+    </p>
+</div>
+
+<div class="analytics-section">
+
+    <!-- JOY -->
+    <div class="analytics-card">
+        <h3>Top Happy Posts<br>😊</h3>
+        {% for post in top_joy_posts %}
+            <div class="post-card">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <span class="score positive">Joy: {{ post.sentiment_data.joy }}%</span>
+            </div>
+        {% empty %}<p>No data</p>{% endfor %}
+    </div>
+
+    <!-- ANGER -->
+    <div class="analytics-card">
+        <h3>Top Angry Posts<br>😠</h3>
+        {% for post in top_anger_posts %}
+            <div class="post-card">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <span class="score negative">Anger: {{ post.sentiment_data.anger }}%</span>
+            </div>
+        {% empty %}<p>No data</p>{% endfor %}
+    </div>
+
+    <!-- SAD -->
+    <div class="analytics-card">
+        <h3>Top Sad Posts<br>😢</h3>
+        {% for post in top_sad_posts %}
+            <div class="post-card">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <span class="score neutral">Sad: {{ post.sentiment_data.sad }}%</span>
+            </div>
+        {% empty %}<p>No data</p>{% endfor %}
+    </div>
+
+    <div class="analytics-card">
+        <h3>Top Fearful Posts<br>😨</h3>
+        {% for post in top_fear_posts %}
+            <div class="post-card">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <span class="score neutral">Fear: {{ post.sentiment_data.fear }}%</span>
+            </div>
+        {% empty %}<p>No data</p>{% endfor %}
+    </div>
+
+    <div class="analytics-card">
+        <h3>Top Surprising Posts<br>😲</h3>
+        {% for post in top_surprise_posts %}
+            <div class="post-card">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <span class="score positive">Surprise: {{ post.sentiment_data.surprise }}%</span>
+            </div>
+        {% empty %}<p>No data</p>{% endfor %}
+    </div>
+
+    <div class="analytics-card">
+        <h3>Top Disgusting Posts<br>🤢</h3>
+        {% for post in top_disgust_posts %}
+            <div class="post-card">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <span class="score negative">Disgust: {{ post.sentiment_data.disgust }}%</span>
+            </div>
+        {% empty %}<p>No data</p>{% endfor %}
+    </div>
+
+    <!-- CONFUSION -->
+    <div class="analytics-card">
+        <h3>Top Confusing Posts<br>😕</h3>
+        {% for post in top_confusion_posts %}
+            <div class="post-card">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <span class="score neutral">Confusion: {{ post.sentiment_data.confusion }}%</span>
+            </div>
+        {% empty %}<p>No data</p>{% endfor %}
+    </div>
+
+    <!-- EXCITEMENT -->
+    <div class="analytics-card">
+        <h3>Top Exciting Posts<br>🤩</h3>
+        {% for post in top_excitement_posts %}
+            <div class="post-card">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <span class="score positive">Excitement: {{ post.sentiment_data.excitement }}%</span>
+            </div>
+        {% empty %}<p>No data</p>{% endfor %}
+    </div>
+
+    <!-- RELIEF -->
+    <div class="analytics-card">
+        <h3>Top Relieving Posts<br>😌</h3>
+        {% for post in top_relief_posts %}
+            <div class="post-card">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <span class="score positive">Relief: {{ post.sentiment_data.relief }}%</span>
+            </div>
+        {% empty %}<p>No data</p>{% endfor %}
+    </div>
+
+    <!-- NEUTRAL -->
+    <div class="analytics-card">
+        <h3>Top Neutral Posts<br>😐</h3>
+        {% for post in top_neutral_posts %}
+            <div class="post-card">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <span class="score neutral">Neutral: {{ post.sentiment_data.neutral }}%</span>
+            </div>
+        {% empty %}<p>No data</p>{% endfor %}
+    </div>
+
+    <!-- CONTROVERSIAL -->
+    <div class="analytics-card">
+        <h3>Top Controversial<br>🔥</h3>
+        {% for post in controversial_posts %}
+            <div class="post-card">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <div class="mini-stats">
+                    <span>😊 {{ post.joy_count }}</span>
+                    <span>😠 {{ post.anger_count }}</span>
+                    <span>😢 {{ post.sad_count }}</span>
+                </div>
+            </div>
+        {% empty %}<p>No data</p>{% endfor %}
+    </div>
+
+</div>
+
+<div class="insights">
+    <h3>Overall Insights</h3>
+    <p>
+        Track emotional trends across all posts and understand how your content impacts your audience.
+    </p>
+</div>
+
+{% endblock content %}

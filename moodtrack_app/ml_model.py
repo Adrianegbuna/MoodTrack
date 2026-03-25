@@ -2,7 +2,7 @@ import joblib
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "sentiment_model.pkl")
+MODEL_PATH = os.path.join(BASE_DIR, "second_sentiment_model.pkl")
 
 model = joblib.load(MODEL_PATH)
 

@@ -26,7 +26,7 @@
 
 .post-author {
   font-weight: bold;
-  color: #0f172a;
+  color: #6c63ff;
   text-decoration: none;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .post-title a:hover {
-  color: #0f172a;
+  color: #6c63ff;
 }
 
 /* Content */
@@ -67,21 +67,21 @@
 
 .page-btn {
   padding: 0.5rem 1rem;
-  border: 1px solid #0f172a;
+  border: 1px solid #6c63ff;
   border-radius: 6px;
   text-decoration: none;
-  color: #0f172a;
+  color: #6c63ff;
   font-size: 0.9rem;
   transition: all 0.2s ease-in-out;
 }
 
 .page-btn:hover {
-  background: #0f172a;
+  background: #6c63ff;
   color: #fff;
 }
 
 .page-btn.active {
-  background: #0f172a;
+  background: #6c63ff;
   color: #fff;
   pointer-events: none;
 }

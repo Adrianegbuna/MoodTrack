@@ -1,7 +1,7 @@
 .hero {
   text-align: center;
   padding: 80px 20px;
-  background-color: #0f172a;
+  background-color: #6c63ff;
   color: white;
 }
 
@@ -21,7 +21,7 @@
   padding: 12px 25px;
   border: none;
   background: white;
-  color: #0f172a;
+  color: #6c63ff;
   font-weight: bold;
   border-radius: 25px;
   cursor: pointer;
@@ -55,13 +55,7 @@
 .cta {
   text-align: center;
   padding: 60px 20px;
-  background-color: #0f172a;
+  background-color: #6c63ff;
   color: white;
 }
 
-.footer {
-  text-align: center;
-  padding: 20px;
-  background: #222;
-  color: #ccc;
-}

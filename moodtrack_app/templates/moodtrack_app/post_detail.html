@@ -18,7 +18,7 @@
   <div class="comment">
     <strong>{{ comment.author }}</strong> 
     <small>{{ comment.created_at|date:"F d, Y H:i" }}</small>
-    <p>{{ comment.content }}</p>
+    <p>{{ comment.content }}</p><p>{{ comment.sentiment }}</p>
   </div>
 {% empty %}
   <p>No comments yet. Be the first to comment!</p>
