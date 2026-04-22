@@ -1,24 +1,143 @@
-{% extends "moodtrack_app/base.html" %}
-{% load crispy_forms_tags %}
-{% block content %}
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'users/profile.css' %}">
+{% extends "moodtrack_app/base.html" %} {% load crispy_forms_tags %} 
+{% load static %} {% block content %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'users/profile.css' %}"
+/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://unpkg.com/cal-heatmap@4.0.0-beta.5/dist/cal-heatmap.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/cal-heatmap@4.0.0-beta.5/dist/cal-heatmap.css"
+/>
 
-<div class="profile-container">
-  <div class="profile-header">
-    <img class="profile-img" src="{{ user.profile.image.url }}" alt="{{ user.username }}">
-    <div class="profile-details">
-      <h2 class="profile-username">{{ user.username }}</h2>
-      <p class="profile-email">{{ user.email }}</p>
+<div class="profile-page">
+  <!-- Original Profile Section -->
+  <div class="profile-container">
+    <div class="profile-header">
+      <img
+        class="profile-img"
+        src="{{ user.profile.image.url }}"
+        alt="{{ user.username }}"
+      />
+      <div class="profile-details">
+        <h2 class="profile-username">{{ user.username }}</h2>
+        <p class="profile-email">{{ user.email }}</p>
+      </div>
     </div>
+
+    <form method="POST" enctype="multipart/form-data" class="profile-form">
+      {% csrf_token %}
+      <h3 class="form-title">Profile Info</h3>
+      {{ u_form|crispy }} {{ p_form|crispy }}
+      <button class="update-btn" type="submit">Update</button>
+    </form>
   </div>
 
-  <form method="POST" enctype="multipart/form-data" class="profile-form">
-    {% csrf_token %}
-    <h3 class="form-title">Profile Info</h3>
-    {{ u_form|crispy }}
-    {{ p_form|crispy }}
-    <button class="update-btn" type="submit">Update</button>
-  </form>
+  <!-- Sentiment Stats Section -->
+  <div class="sentiment-stats-container">
+    <div class="stats-header">
+      <div class="stat-card">
+        <h3>{{ profile.points }}</h3>
+        <p>Total Points</p>
+      </div>
+      <div class="stat-card">
+        <h3>{{ profile.reputation }}</h3>
+        <p>Reputation</p>
+      </div>
+      <div class="stat-card">
+        <h3>{{ total_comments }}</h3>
+        <p>Comments</p>
+      </div>
+    </div>
+
+    <div class="sentiment-section">
+      <div class="section-header">
+        <div class="section-icon">📊</div>
+        <h3>Your Emotional Profile</h3>
+      </div>
+      <div class="chart-box">
+        <canvas id="sentimentRadar"></canvas>
+      </div>
+      <p class="insight">
+        Most expressed: <strong>{{ most_expressed }}</strong>
+      </p>
+    </div>
+
+    <div class="badges-section">
+      <div class="section-header">
+        <div class="section-icon">🏆</div>
+        <h3>Your Badges</h3>
+      </div>
+      <div class="badge-grid">
+        {% for user_badge in badges %}
+        <div class="badge-card earned">
+          <span class="badge-icon">{{ user_badge.badge.icon }}</span>
+          <h4>{{ user_badge.badge.name }}</h4>
+          <p>{{ user_badge.badge.description }}</p>
+          <small>Awarded {{ user_badge.awarded_at|date:"M d, Y" }}</small>
+        </div>
+        {% empty %}
+        <p>No badges yet. Keep engaging!</p>
+        {% endfor %}
+      </div>
+
+      <h4>Next Achievements</h4>
+      <div class="badge-grid locked">
+        {% for badge in next_badges %}
+        <div class="badge-card locked">
+          <span class="badge-icon">🔒</span>
+          <h4>{{ badge.name }}</h4>
+          <p>{{ badge.description }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  // Radar Chart for Sentiment Distribution
+  const sentimentData = {{ sentiment_dist|safe }};
+  console.log('Sentiment data:', sentimentData); // Debug line
+  
+  const ctx = document.getElementById("sentimentRadar").getContext("2d");
+  const radar = new Chart(ctx, {
+    type: "radar",
+    data: {
+      labels: Object.keys(sentimentData),
+      datasets: [
+        {
+          label: "Your Emotions (%)",
+          data: Object.values(sentimentData),
+          backgroundColor: "rgba(108, 99, 255, 0.2)",
+          borderColor: "rgba(108, 99, 255, 1)",
+          borderWidth: 2,
+          pointBackgroundColor: "rgba(108, 99, 255, 1)",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            stepSize: 20,
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+        },
+      },
+    },
+  });
+</script>
 {% endblock content %}
