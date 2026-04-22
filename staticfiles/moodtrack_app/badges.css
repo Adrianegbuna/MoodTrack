@@ -1,0 +1,160 @@
+.badges-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.badges-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.badges-header h2 {
+    color: #6c63ff;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.points-display {
+    background: linear-gradient(135deg, #6c63ff 0%, #5a52d5 100%);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+}
+
+.badges-section {
+    margin-bottom: 40px;
+}
+
+.badges-section h3 {
+    color: #333;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #6c63ff;
+    display: inline-block;
+}
+
+.earned-section h3 {
+    border-color: #6c63ff;
+    color: #6c63ff;
+}
+
+.locked-section h3 {
+    border-color: #ccc;
+    color: #888;
+}
+
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.badge-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.badge-card.earned {
+    border: 2px solid #6c63ff;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.15);
+}
+
+.badge-card.earned:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(108, 99, 255, 0.25);
+}
+
+.badge-card.locked {
+    border: 2px dashed #ccc;
+    background: #f9f9f9;
+    opacity: 0.7;
+}
+
+.badge-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.badge-card.earned .badge-icon {
+    filter: drop-shadow(0 4px 6px rgba(108, 99, 255, 0.3));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.badge-card h4 {
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+}
+
+.badge-card.earned h4 {
+    color: #6c63ff;
+}
+
+.badge-card p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0 0 15px 0;
+}
+
+.badge-type {
+    display: inline-block;
+    background: rgba(108, 99, 255, 0.1);
+    color: #6c63ff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.points-needed {
+    display: inline-block;
+    background: #e0e0e0;
+    color: #888;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #888;
+    font-style: italic;
+    background: rgba(108, 99, 255, 0.05);
+    border-radius: 15px;
+    border: 2px dashed #6c63ff;
+}
+
+@media (max-width: 768px) {
+    .badges-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .badges-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}

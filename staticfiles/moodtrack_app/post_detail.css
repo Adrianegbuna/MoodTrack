@@ -16,5 +16,324 @@
   cursor: pointer;
 }
 
+/* Comment Actions - Reply & Report Buttons */
+.comment-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
 
-/* #0f172a
+.btn-reply {
+  background: #6c63ff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-reply:hover {
+  background: #5a52d5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(108, 99, 255, 0.3);
+}
+
+.btn-report-small {
+  background: transparent;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-report-small:hover {
+  background: #dc3545;
+  color: white;
+}
+
+/* Reply Form */
+.reply-form {
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(108, 99, 255, 0.05);
+  border-radius: 10px;
+  border-left: 3px solid #6c63ff;
+}
+
+.reply-form textarea {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.reply-form button {
+  margin-top: 10px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reply-form button:hover {
+  background: #5a52d5;
+}
+
+/* Report Modal Button */
+.btn-report {
+  background: transparent;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-report:hover {
+  background: #dc3545;
+  color: white;
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background: white;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border-top: 4px solid #6c63ff;
+}
+
+.modal-content h3 {
+  color: #6c63ff;
+  margin-bottom: 20px;
+}
+
+.modal-content .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-content .close:hover {
+  color: #6c63ff;
+}
+
+.modal-content form button[type="submit"] {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-content form button[type="submit"]:hover {
+  background: #c82333;
+}
+
+/* Reply Indentation */
+.comment.reply {
+  margin-left: 40px;
+  border-left: 3px solid #6c63ff;
+  padding-left: 15px;
+  background: rgba(108, 99, 255, 0.03);
+  border-radius: 0 10px 10px 0;
+}
+
+/* "Replying to" indicator */
+.replying-to {
+  margin: 8px 0;
+  padding: 8px 12px;
+  background: rgba(108, 99, 255, 0.1);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #666;
+  border-left: 3px solid #6c63ff;
+}
+
+.reply-label {
+  color: #6c63ff;
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.parent-preview {
+  font-style: italic;
+  color: #888;
+}
+
+/* Reply form notice */
+.replying-notice {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: rgba(108, 99, 255, 0.1);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #555;
+  border-left: 3px solid #6c63ff;
+}
+
+.replying-notice strong {
+  color: #6c63ff;
+}
+
+/* Nested replies container */
+.replies {
+  margin-top: 15px;
+}
+
+/* Visual thread line */
+.comment {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.comment.reply::before {
+  content: "";
+  position: absolute;
+  left: -25px;
+  top: 20px;
+  width: 15px;
+  height: 2px;
+  background: #6c63ff;
+  opacity: 0.5;
+}
+
+/* ============================================
+   SENTIMENT BAR SEGMENTS - COLORS
+   ============================================ */
+
+.segment.joy {
+  background-color: #22c55e;
+}
+
+.segment.anger {
+  background-color: #ef4444;
+}
+
+.segment.sad {
+  background-color: #3b82f6;
+}
+
+.segment.fear {
+  background-color: #f97316;
+}
+
+.segment.surprise {
+  background-color: #a855f7;
+}
+
+.segment.neutral {
+  background-color: grey;
+}
+
+.segment.disgust {
+  background-color: #84cc16;
+}
+
+.segment.excitement {
+  background-color: #ec4899;
+}
+
+.segment.confusion {
+  background-color: #14b8a6;
+}
+
+.segment.relief {
+  background-color: #8b5cf6;
+}
+
+/* Sentiment badge colors for comments */
+.sentiment-badge.joy {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #15803d;
+}
+
+.sentiment-badge.anger {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #b91c1c;
+}
+
+.sentiment-badge.sad {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #1d4ed8;
+}
+
+.sentiment-badge.fear {
+  background-color: rgba(249, 115, 22, 0.2);
+  color: #c2410c;
+}
+
+.sentiment-badge.surprise {
+  background-color: rgba(168, 85, 247, 0.2);
+  color: #7c3aed;
+}
+
+.sentiment-badge.neutral {
+  background-color: rgba(128, 128, 128, 0.2);
+  color: #666;
+}
+
+.sentiment-badge.disgust {
+  background-color: rgba(132, 204, 22, 0.2);
+  color: #4d7c0f;
+}
+
+.sentiment-badge.excitement {
+  background-color: rgba(236, 72, 153, 0.2);
+  color: #be185d;
+}
+
+.sentiment-badge.confusion {
+  background-color: rgba(20, 184, 166, 0.2);
+  color: #0f766e;
+}
+
+.sentiment-badge.relief {
+  background-color: rgba(139, 92, 246, 0.2);
+  color: #6d28d9;
+}
+
+.sentiment-badge {
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}

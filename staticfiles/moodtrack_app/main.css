@@ -39,10 +39,44 @@ ul {
   transition: width 0.3s ease;
   overflow: hidden;
   z-index: 100;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar:hover {
   width: 200px;
+}
+
+/* Custom scrollbar matching your theme color #6c63ff */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #5a52d5;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #6c63ff;
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #8884ff;
+}
+
+/* Ensure nav-links takes available space but allows scrolling */
+.nav-links {
+  max-height: calc(100vh - 100px); /* Adjust based on your logo height */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 20px; /* Space at bottom */
+}
+
+@media (max-width: 768px) {
+  .sidebar::-webkit-scrollbar {
+    width: 3px;
+  }
 }
 
 .logo h2 {
@@ -79,7 +113,9 @@ ul {
   padding: 1rem 1.2rem;
   color: #f8fafc;
   text-decoration: none;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
   width: 100%;
   background: none;
   border: none;
@@ -143,62 +179,15 @@ ul {
 .footer {
   background: #6c63ff;
   color: #ffffff;
-  padding: 50px 0 20px 0;
 }
 
 .footer-container {
   max-width: 1200px;
   margin: auto;
-  padding: 0 20px;
-}
-
-.footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 40px;
-  margin-bottom: 30px;
-}
-
-.footer h2 {
-  font-size: 20px;
-  margin-bottom: 15px;
-  color: #fff;
-}
-
-.footer p,
-.footer li,
-.footer a {
-  color: #ccc;
-  font-size: 15px;
-  line-height: 1.8;
-}
-
-.footer a:hover {
-  text-decoration: underline;
-}
-
-.footer-section-links li {
-  margin-bottom: 8px;
-}
-
-.footer-section-links ul li a {
-  text-decoration: none;
-}
-
-.footer-section-contact p {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.footer-bottom {
+  padding: 20px;
   text-align: center;
-  border-top: 1px solid #444;
-  padding-top: 15px;
-  font-size: 14px;
-  color: #aaa;
+  font-size: 15px;
+  color: white;
 }
 
 /* Authorization Page */
@@ -222,9 +211,6 @@ ul {
   font-size: 16px;
 }
 
-/* ============================================
-   RESPONSIVE - TABLET (768px and below)
-   ============================================ */
 @media (max-width: 768px) {
   /* Narrower sidebar */
   .sidebar {
@@ -268,35 +254,8 @@ ul {
     align-items: flex-start;
     gap: 30px;
   }
-
-  .footer-section-about,
-  .footer-section-links,
-  .footer-section-contact {
-    width: 100%;
-  }
-
-  .footer-section-links ul {
-    padding-left: 0;
-  }
-
-  .footer-section-links ul li {
-    list-style: none;
-  }
-
-  .footer h2 {
-    font-size: 18px;
-  }
-
-  .footer p,
-  .footer a,
-  .footer li {
-    font-size: 14px;
-  }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE (480px and below)
-   ============================================ */
 @media (max-width: 480px) {
   /* Even narrower sidebar */
   .sidebar {
@@ -347,21 +306,8 @@ ul {
     padding: 40px 10px 15px 10px;
   }
 
-  .footer h2 {
-    font-size: 16px;
-  }
-
   .footer-bottom {
     font-size: 13px;
-  }
-
-  .footer-section-contact p {
-    font-size: 13px;
-  }
-
-  .footer-section-contact box-icon {
-    width: 16px;
-    height: 16px;
   }
 }
 
@@ -400,7 +346,6 @@ ul {
     min-width: 16px;
   }
 
-  /* Adjust main content margin */
   .main-content {
     margin-left: 48px;
     padding: 0.2rem;
