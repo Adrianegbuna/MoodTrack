@@ -3,37 +3,113 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'moodtrack_app/post_detail.css' %}">
 
-<article class="post-card">
+<article class="post-card" data-post-id="{{ post.id }}">
   <h2>{{ post.title }}</h2>
   <p class="post-meta">By {{ post.author }} | {{ post.created_at|date:"F d, Y" }}</p>
   <p>{{ post.content }}</p>
+  <div class="post-stats">
+    <span>👍 <span class="like-count">{{ post.total_likes }}</span></span>
+    <span>👎 <span class="dislike-count">{{ post.total_dislikes }}</span></span>
+  </div>
+  
+  <!-- Report Button -->
+  <button onclick="document.getElementById('reportModal').style.display='block'" class="btn-report">
+    🚩 Report
+  </button>
 </article>
 
 <hr>
 
 <!-- Comments Section -->
-<h3>Comments ({{ comments.count }})</h3>
-
-{% for comment in comments %}
-  <div class="comment">
-    <strong>{{ comment.author }}</strong> 
-    <small>{{ comment.created_at|date:"F d, Y H:i" }}</small>
-    <p>{{ comment.content }}</p><p>{{ comment.sentiment }}</p>
+<div id="comments-section">
+  <h3>Comments (<span id="comments-count">{{ comments.count }}</span>)</h3>
+  
+  <div id="comments-list">
+    {% for comment in comments %}
+      {% include "moodtrack_app/comment_thread.html" with comment=comment %}
+    {% empty %}
+      <p>No comments yet. Be the first!</p>
+    {% endfor %}
   </div>
-{% empty %}
-  <p>No comments yet. Be the first to comment!</p>
-{% endfor %}
+</div>
 
 <hr>
 
 {% if user.is_authenticated %}
-  <form method="post">
+  <form method="post" id="commentForm">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn-comment">Add Comment</button>
   </form>
-{% else %}
-  <p><a href="{% url 'login' %}">Log in</a> to comment.</p>
 {% endif %}
 
-{% endblock content %}
+<!-- Report Modal -->
+<div id="reportModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('reportModal').style.display='none'">&times;</span>
+    <h3>Report Content</h3>
+    <form method="post" action="{% url 'create-report' %}">
+      {% csrf_token %}
+      <input type="hidden" name="post_id" value="{{ post.id }}">
+      {{ report_form.as_p }}
+      <button type="submit">Submit Report</button>
+    </form>
+  </div>
+</div>
+
+<!-- JavaScript for Reply Buttons -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle all reply button clicks
+    document.querySelectorAll('.btn-reply').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const commentId = this.getAttribute('data-comment-id');
+            const form = document.getElementById('reply-form-' + commentId);
+            
+            if (form) {
+                // Toggle display
+                if (form.style.display === 'none' || form.style.display === '') {
+                    form.style.display = 'block';
+                } else {
+                    form.style.display = 'none';
+                }
+            } else {
+                console.error('Reply form not found for comment:', commentId);
+            }
+        });
+    });
+    
+    // Report comment function
+    window.reportComment = function(commentId) {
+        if (confirm('Report this comment?')) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{% url "create-report" %}';
+            form.style.display = 'none';
+            
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            
+            const commentInput = document.createElement('input');
+            commentInput.type = 'hidden';
+            commentInput.name = 'comment_id';
+            commentInput.value = commentId;
+            
+            const reportType = document.createElement('input');
+            reportType.type = 'hidden';
+            reportType.name = 'report_type';
+            reportType.value = 'inappropriate';
+            
+            form.appendChild(csrfInput);
+            form.appendChild(commentInput);
+            form.appendChild(reportType);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    };
+});
+</script>
+{% endblock %}

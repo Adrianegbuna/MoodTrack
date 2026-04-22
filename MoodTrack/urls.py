@@ -7,10 +7,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('follow/<str:username>/', user_views.follow_user, name='follow-user'),
-    path('unfollow/<str:username>/', user_views.unfollow_user, name='unfollow-user'),
-    path('register/', user_views.register, name='register'),
-    path('profile/', user_views.profile, name='profile'),
+    
+    # Updated to CBV - use as_view()
+    path('follow/<str:username>/', user_views.FollowUserView.as_view(), name='follow-user'),
+    path('unfollow/<str:username>/', user_views.UnfollowUserView.as_view(), name='unfollow-user'),
+    path('register/', user_views.RegisterView.as_view(), name='register'),
+    path('profile/', user_views.ProfileView.as_view(), name='profile'),
 
     path('login/', 
           auth_views.LoginView.as_view(template_name='users/login.html'), 

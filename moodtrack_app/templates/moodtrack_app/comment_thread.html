@@ -1,0 +1,41 @@
+<div id="comment-{{ comment.id }}" class="comment {% if comment.parent %}reply{% endif %}">
+  <div class="comment-header">
+    <strong>{{ comment.author }}</strong>
+    <span class="sentiment-badge {{ comment.sentiment }}">{{ comment.sentiment }}</span>
+    <small>{{ comment.created_at|date:"F d, Y H:i" }}</small>
+  </div>
+  
+  <!-- Show "Replying to" if this is a reply -->
+  {% if comment.parent %}
+  <div class="replying-to">
+    <span class="reply-label">↳ Replying to:</span>
+    <span class="parent-preview">{{ comment.parent.content|truncatewords:10 }}</span>
+  </div>
+  {% endif %}
+  
+  <p>{{ comment.content }}</p>
+  
+  <div class="comment-actions">
+    <button data-comment-id="{{ comment.id }}" class="btn-reply">Reply</button>
+    <button onclick="reportComment('{{ comment.id }}')" class="btn-report-small">🚩</button>
+  </div>
+  
+  <!-- Reply Form (Hidden by default) -->
+  <div id="reply-form-{{ comment.id }}" class="reply-form" style="display: none;">
+    <div class="replying-notice">
+      Replying to <strong>{{ comment.author }}</strong>: "{{ comment.content|truncatewords:8 }}"
+    </div>
+    <form method="post" action="{% url 'comment-reply' comment.id %}">
+      {% csrf_token %}
+      <textarea name="content" rows="2" class="form-control" placeholder="Write a reply..."></textarea>
+      <button type="submit">Submit Reply</button>
+    </form>
+  </div>
+  
+  <!-- Nested Replies -->
+  <div class="replies">
+    {% for reply in comment.replies.all %}
+      {% include "moodtrack_app/comment_thread.html" with comment=reply %}
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,48 @@
+{% extends "moodtrack_app/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'moodtrack_app/trending.css' %}">
+
+<div class="trending-header">
+    <h2>🔥 Trending Now</h2>
+    <div class="time-filters">
+        <a href="?timeframe=today" class="{% if timeframe == 'today' %}active{% endif %}">Today</a>
+        <a href="?timeframe=week" class="{% if timeframe == 'week' %}active{% endif %}">This Week</a>
+        <a href="?timeframe=month" class="{% if timeframe == 'month' %}active{% endif %}">This Month</a>
+    </div>
+</div>
+
+<div class="trending-list">
+    {% for post in posts %}
+    <article class="trending-card rank-{{ forloop.counter }}">
+        <div class="rank-number">{{ forloop.counter }}</div>
+        <div class="trending-content">
+            <span class="category-badge">{{ post.category }}</span>
+            <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+            <p>{{ post.content|truncatewords:20 }}</p>
+            <div class="trending-meta">
+                <span class="sentiment-indicator {{ post.dominant_sentiment }}">
+                    {{ post.dominant_sentiment }}
+                </span>
+                <span>👍 {{ post.total_likes }}</span>
+                <span>💬 {{ post.comments.count }}</span>
+                <span>👁 {{ post.views_count }}</span>
+                <span class="trending-score">🔥 {{ post.trending_score|floatformat:1 }}</span>
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+
+{% if is_paginated %}
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}&timeframe={{ timeframe }}">Previous</a>
+    {% endif %}
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}&timeframe={{ timeframe }}">Next</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

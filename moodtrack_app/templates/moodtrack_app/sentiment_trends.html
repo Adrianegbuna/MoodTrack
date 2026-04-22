@@ -1,0 +1,73 @@
+{% extends "moodtrack_app/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'moodtrack_app/trends.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container">
+    <h2>Sentiment Trends Over Time</h2>
+    
+    <div class="time-filter">
+        <a href="{% url 'trending' %}" class="btn btn-danger">🔥 Trending Now</a>
+        <a href="?days=7" class="btn {% if days == 7 %}active{% endif %}">Last 7 Days</a>
+        <a href="?days=30" class="btn {% if days == 30 %}active{% endif %}">Last 30 Days</a>
+        <a href="?days=90" class="btn {% if days == 90 %}active{% endif %}">Last 3 Months</a>
+    </div>
+    
+    <div class="chart-container">
+        <canvas id="trendsChart"></canvas>
+    </div>
+    
+    <h3>Category Comparison</h3>
+    <div class="chart-container">
+        <canvas id="categoryChart"></canvas>
+    </div>
+</div>
+
+<script>
+const dates = JSON.parse('{{ dates|safe }}');
+const datasets = JSON.parse('{{ datasets|safe }}');
+const categoryData = JSON.parse('{{ category_data|safe }}');
+
+// Line Chart for Trends
+const ctx = document.getElementById('trendsChart').getContext('2d');
+const trendsChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: dates,
+        datasets: [
+            {label: 'Joy', data: datasets.joy, borderColor: '#FFD700', tension: 0.4},
+            {label: 'Anger', data: datasets.anger, borderColor: '#DC143C', tension: 0.4},
+            {label: 'Sad', data: datasets.sad, borderColor: '#4682B4', tension: 0.4},
+            {label: 'Fear', data: datasets.fear, borderColor: '#8B008B', tension: 0.4},
+        ]
+    },
+    options: {
+        responsive: true,
+        interaction: {intersect: false, mode: 'index'},
+        plugins: {
+            title: {display: true, text: 'Daily Sentiment Distribution'}
+        }
+    }
+});
+
+// Bar Chart for Categories
+const catCtx = document.getElementById('categoryChart').getContext('2d');
+const catChart = new Chart(catCtx, {
+    type: 'bar',
+    data: {
+        labels: Object.keys(categoryData),
+        datasets: [
+            {label: 'Joy', data: Object.values(categoryData).map(c => c.joy), backgroundColor: '#FFD700'},
+            {label: 'Anger', data: Object.values(categoryData).map(c => c.anger), backgroundColor: '#DC143C'},
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {display: true, text: 'Sentiment by Category'}
+        }
+    }
+});
+</script>
+{% endblock %}

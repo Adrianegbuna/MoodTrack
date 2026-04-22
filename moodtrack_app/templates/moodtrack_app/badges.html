@@ -1,0 +1,48 @@
+{% extends "moodtrack_app/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'moodtrack_app/badges.css' %}">
+
+<div class="badges-container">
+    <div class="badges-header">
+        <h2>🏆 Your Achievements</h2>
+        <div class="points-display">
+            <span class="points-badge">{{ user_points }} Points</span>
+        </div>
+    </div>
+
+    <!-- Earned Badges Section -->
+    <div class="badges-section earned-section">
+        <h3>Unlocked Badges ({{ earned_badges|length }})</h3>
+        <div class="badges-grid">
+            {% for badge in earned_badges %}
+            <div class="badge-card earned">
+                <div class="badge-icon">{{ badge.icon }}</div>
+                <h4>{{ badge.name }}</h4>
+                <p>{{ badge.description }}</p>
+                <span class="badge-type">{{ badge.get_badge_type_display }}</span>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <p>No badges earned yet. Start commenting and posting to unlock achievements!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Locked Badges Section -->
+    <div class="badges-section locked-section">
+        <h3>Locked Badges ({{ unearned_badges|length }})</h3>
+        <div class="badges-grid">
+            {% for badge in unearned_badges %}
+            <div class="badge-card locked">
+                <div class="badge-icon">🔒</div>
+                <h4>{{ badge.name }}</h4>
+                <p>{{ badge.description }}</p>
+                <span class="points-needed">{{ badge.points_required }} pts needed</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

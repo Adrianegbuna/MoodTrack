@@ -2,7 +2,9 @@ from django.urls import path
 from .views import (
     CategoryPostView, PostCreateView, PostUpdateView, PostDeleteView,
     UserPostListView, LikePostView, DislikePostView, LandingPageView,
-    PostDetailView, AnalyticsView
+    PostDetailView, AnalyticsView, SentimentTrendsView,
+    TrendingPostsView, RandomPostView, RandomPostByCategoryView,
+    CommentReplyView, ReportCreateView, ExportAnalyticsView, BadgesView
 )
 
 urlpatterns = [
@@ -20,4 +22,12 @@ urlpatterns = [
     path('post/<int:post_id>/like/', LikePostView.as_view(), name='like-post'),
     path('post/<int:post_id>/dislike/', DislikePostView.as_view(), name='dislike-post'),
     path('analytics', AnalyticsView.as_view(), name='analytics'),
+    path('analytics/trends/', SentimentTrendsView.as_view(), name='sentiment-trends'),
+    path('analytics/export/', ExportAnalyticsView.as_view(), name='export-analytics'),
+    path('badges/', BadgesView.as_view(), name='badges'),
+    path('trending/', TrendingPostsView.as_view(), name='trending'),
+    path('random/', RandomPostView.as_view(), name='random-post'),
+    path('random/<str:category>/', RandomPostByCategoryView.as_view(), name='random-post-category'),
+    path('comment/<int:comment_id>/reply/', CommentReplyView.as_view(), name='comment-reply'),
+    path('report/create/', ReportCreateView.as_view(), name='create-report'),
 ]

@@ -1,5 +1,5 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -18,8 +18,6 @@
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css"
-      integrity="sha384-dpuaG1suU0eT09tx5plTaGMLBsfDLzUCCUXOY2j/LSvXYuG6Bqs43ALlhIqAJVRb"
-      crossorigin="anonymous"
     />
     <link
       rel="stylesheet"
@@ -29,6 +27,7 @@
     />
     <title>MoodTrack</title>
   </head>
+  
   <body class="d-flex flex-column min-vh-100">
     <div class="wrapper">
       <div class="sidebar">
@@ -67,6 +66,24 @@
               <span>Analytics</span>
             </a>
           </li>
+          <li>
+            <a href="{% url 'badges' %}">
+              <i class="fa-solid fa-medal"></i>
+              <span>Badges</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'random-post' %}">
+              <i class="fa-solid fa-shuffle"></i>
+              <span>Random Post</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'sentiment-trends' %}">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>Trends</span>
+            </a>
+          </li>
           <li class="auth-btns">
             <form action="{% url 'logout' %}" method="post">
               {% csrf_token %}
@@ -102,30 +119,7 @@
     </div>
     <footer class="footer">
       <div class="footer-container">
-        <div class="footer-content">
-          <div class="footer-section-about">
-            <h2>About Us</h2>
-            <p>Track emotions through sentiments and improve user interaction!</p>
-          </div>
-          <div class="footer-section-links">
-            <h2>Quick Links</h2>
-            <ul>
-              <li><a href="{% url 'home' %}">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">FAQs</a></li>
-            </ul>
-          </div>
-          <div class="footer-section-contact">
-            <h2>Contact Me</h2>
-            <p><box-icon name="current-location"></box-icon> Abuja</p>
-            <p><box-icon name="envelope"></box-icon> ad123eg456@gmail.com</p>
-            <p><box-icon name="phone"></box-icon> +234 806 841 9918</p>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          &copy; 2026 MoodTrack | All rights reserved.
-        </div>
+        &copy; 2026 MoodTrack | All rights reserved.
       </div>
     </footer>
     <script type="text/javascript">
@@ -139,12 +133,12 @@
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
       integrity="sha384-oBqDVmMz4fnFO9gyb4pdogXx4ITyO91D/pBz0p5zzj0h5fJkSTe1m3eRbmprh3Xv"
-      crossorigin="anonymous">
-    </script>
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
       integrity="sha384-QmrVhtQZgi8Zi2gu2bB1+LrZ7kY+0XcF6EVTBrDpt1JokQO3lK3IB/4EgmgS7A4r"
-      crossorigin="anonymous">
-    </script>
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

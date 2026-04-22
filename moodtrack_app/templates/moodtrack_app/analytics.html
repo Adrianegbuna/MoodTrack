@@ -10,6 +10,13 @@
     </p>
 </div>
 
+<div class="quick-links" style="margin: 20px 0; display: flex; gap: 10px; flex-wrap: wrap;">
+    <a href="{% url 'sentiment-trends' %}" class="btn btn-primary">📈 View Trends Over Time</a>
+    <a href="{% url 'trending' %}" class="btn btn-danger">🔥 Trending Posts</a>
+    <a href="{% url 'badges' %}" class="btn btn-warning">🏆 My Badges</a>
+    <a href="{% url 'export-analytics' %}?type=csv&data=sentiment" class="btn btn-success">📥 Export Data</a>
+</div>
+
 <div class="analytics-section">
 
     <!-- JOY -->
@@ -145,13 +152,6 @@
         {% empty %}<p>No data</p>{% endfor %}
     </div>
 
-</div>
-
-<div class="insights">
-    <h3>Overall Insights</h3>
-    <p>
-        Track emotional trends across all posts and understand how your content impacts your audience.
-    </p>
 </div>
 
 {% endblock content %}
