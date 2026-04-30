@@ -10,6 +10,3 @@ joblib
 pandas
 numpy
 pillow
-channels
-channels-redis
-daphne
