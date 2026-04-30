@@ -26,7 +26,6 @@ ALLOWED_HOSTS = ['moodtrack-hc03.onrender.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',
     'moodtrack_app',
     'users',
     'crispy_forms',
@@ -68,18 +67,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'MoodTrack.wsgi.application'
-
-ASGI_APPLICATION = 'MoodTrack.asgi.application'
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}
-
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
