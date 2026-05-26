@@ -1,0 +1,208 @@
+ */.content-section {
+  background-color: #1A1A1B;
+  border: 1px solid #272729;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Legend / Form title */
+.content-section legend,
+.content-section .border-bottom {
+  color: #E7E9EA !important;
+  border-bottom: 1px solid #272729 !important;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* All form labels */
+.content-section label,
+.content-section .form-label,
+.content-section .col-form-label {
+  color: #D7DADC !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* All text inputs, textareas, selects */
+.content-section input[type="text"],
+.content-section input[type="email"],
+.content-section input[type="password"],
+.content-section input[type="url"],
+.content-section input[type="number"],
+.content-section textarea,
+.content-section select,
+.content-section .form-control,
+.content-section .form-select {
+  background-color: #272729 !important;
+  color: #E7E9EA !important;
+  border: 1px solid #3A3A3C !important;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.content-section input::placeholder,
+.content-section textarea::placeholder {
+  color: #818384 !important;
+}
+
+/* Focus states */
+.content-section input:focus,
+.content-section textarea:focus,
+.content-section select:focus,
+.content-section .form-control:focus,
+.content-section .form-select:focus {
+  background-color: #272729 !important;
+  color: #E7E9EA !important;
+  border-color: #6c63ff !important;
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2) !important;
+  outline: none;
+}
+
+/* Textarea specific */
+.content-section textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Select dropdown arrow color fix */
+.content-section select,
+.content-section .form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23D7DADC' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+
+/* Checkbox and radio labels */
+.content-section .form-check-label {
+  color: #D7DADC !important;
+}
+
+.content-section .form-check-input {
+  background-color: #272729;
+  border-color: #3A3A3C;
+}
+
+.content-section .form-check-input:checked {
+  background-color: #6c63ff;
+  border-color: #6c63ff;
+}
+
+/* Help text / form hints */
+.content-section .form-text,
+.content-section .help-block,
+.content-section small {
+  color: #818384 !important;
+  font-size: 0.85rem;
+}
+
+/* Error messages */
+.content-section .invalid-feedback,
+.content-section .text-danger,
+.content-section .errorlist {
+  color: #f87171 !important;
+  font-size: 0.85rem;
+}
+
+.content-section .is-invalid,
+.content-section input.is-invalid,
+.content-section textarea.is-invalid {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.05) !important;
+}
+
+/* Asterisk on required fields */
+.content-section .asteriskField,
+.content-section .required label::after {
+  color: #f87171;
+}
+
+/* Submit button */
+.content-section .btn-outline-info,
+.content-section button[type="submit"] {
+  background-color: #6c63ff;
+  border: none;
+  color: white;
+  border-radius: 24px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.content-section .btn-outline-info:hover,
+.content-section button[type="submit"]:hover {
+  background-color: #6c63ff;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+}
+
+/* Fieldset styling */
+.content-section fieldset.form-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Crispy forms specific wrappers */
+.content-section .mb-3,
+.content-section .form-group {
+  margin-bottom: 1.25rem;
+}
+
+/* Input groups (if any) */
+.content-section .input-group-text {
+  background-color: #272729;
+  color: #D7DADC;
+  border: 1px solid #3A3A3C;
+}
+
+/* File upload input styling */
+.content-section input[type="file"],
+.content-section .form-control-file {
+  background-color: #272729;
+  color: #D7DADC;
+  border: 1px solid #3A3A3C;
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media screen and (max-width: 768px) {
+  .content-section {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+  
+  .content-section legend,
+  .content-section .border-bottom {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .content-section {
+    padding: 1rem;
+    margin: 0 0.5rem;
+    border-radius: 12px;
+  }
+  
+  .content-section legend,
+  .content-section .border-bottom {
+    font-size: 1.15rem;
+  }
+  
+  .content-section input,
+  .content-section textarea,
+  .content-section select,
+  .content-section .form-control {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
