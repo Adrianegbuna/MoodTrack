@@ -31,10 +31,12 @@
 {% if posts %}
   {% for post in posts %}
     <article class="post">
-      <img class="post-avatar" src="{{ post.author.profile.image.url }}" alt="profile picture">
+      <div class="post-header">
+        <img class="post-avatar" src="{{ post.author.profile.image.url }}" alt="profile picture">
+        <a href="{% url 'user-posts' post.author.username %}" class="post-author">{{ post.author }}</a>
+      </div>
       <div class="post-body">
         <div class="post-meta">
-          <a href="{% url 'user-posts' post.author.username %}" class="post-author">Author: {{ post.author }}</a>
           <span class="post-date">{{ post.created_at|date:"F d, Y H:i:s" }}</span>
         </div>
         <h2 class="post-title">
