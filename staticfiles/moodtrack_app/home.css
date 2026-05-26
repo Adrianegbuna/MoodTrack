@@ -80,7 +80,6 @@
 }
 
 .post-date::before {
-  content: "·";
   margin-right: 0.5rem;
   color: #d1d5db;
 }
@@ -101,7 +100,7 @@
   margin-top: 0;
   line-height: 1.6;
   color: white;
-  font-size: 0.92rem;
+  font-size: 0.8rem;
   flex: 1;
   overflow-wrap: break-word;
   word-wrap: break-word;
