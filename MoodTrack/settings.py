@@ -1,10 +1,9 @@
 import os
 from pathlib import Path
-from decouple import config
+from decouple import Config
 import dj_database_url
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -13,19 +12,20 @@ MEDIA_URL = '/media/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
+ 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SK")
+SECRET_KEY = Config("SK")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['moodtrack-hc03.onrender.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'moodtrack_app',
     'users',
     'crispy_forms',
@@ -67,6 +67,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'MoodTrack.wsgi.application'
+
+ASGI_APPLICATION = 'your_project.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
