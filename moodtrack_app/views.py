@@ -294,9 +294,6 @@ class CommentReplyView(LoginRequiredMixin, View):
             reply.sentiment = sentiment
             reply.save()
             try:
-                from channels.layers import get_channel_layer
-                from asgiref.sync import async_to_sync
-                from django.template.loader import render_to_string
                 channel_layer = get_channel_layer()
                 html = render_to_string('moodtrack_app/comment_reply.html', {'reply': reply})
                 async_to_sync(channel_layer.group_send)(

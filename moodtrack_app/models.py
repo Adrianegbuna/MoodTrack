@@ -111,7 +111,8 @@ class UserProfile(models.Model):
     points = models.PositiveIntegerField(default=0)
     reputation = models.PositiveIntegerField(default=0)
     last_active = models.DateTimeField(auto_now=True)
-    
+    total_posts = models.PositiveIntegerField(default=0)
+    trending_posts_count = models.PositiveIntegerField(default=0)
     # Sentiment tracking for personal profile
     total_comments = models.PositiveIntegerField(default=0)
     joy_count = models.PositiveIntegerField(default=0)
