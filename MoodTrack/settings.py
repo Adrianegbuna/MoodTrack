@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from decouple import Config
+from decouple import config
 import dj_database_url
 
 
@@ -14,12 +14,17 @@ MEDIA_URL = '/media/'
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
  
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = Config("SK")
+SECRET_KEY = config("SK")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    ".railway.app",
+    ".up.railway.app",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -68,16 +73,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MoodTrack.wsgi.application'
 
-ASGI_APPLICATION = 'your_project.asgi.application'
+ASGI_APPLICATION = 'MoodTrack.asgi.application'
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+if os.environ.get("REDIS_URL"):
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": [os.environ["REDIS_URL"]],
+            },
         },
-    },
-}
+    }
+else:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels.layers.InMemoryChannelLayer",
+        },
+    }
 
 
 # Database

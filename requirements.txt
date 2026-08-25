@@ -1,10 +1,13 @@
 Django
 gunicorn
+uvicorn
 whitenoise
 dj-database-url
 python-decouple
 psycopg2-binary
 crispy-bootstrap5
+channels
+channels-redis
 scikit-learn
 joblib 
 pandas
